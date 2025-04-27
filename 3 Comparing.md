@@ -75,3 +75,12 @@ ove un metodo _non statico_ della classe `NewType`, detto `sum`, svolge la stess
 
 
 Si nota che le due versioni forniscono il medesimo risultato.
+
+
+# Ma cos'è davvero il metodo .comparing?
+
+Solo ora sveliamo l'identità del 'metodo' .comparing
+
+Il metodo .comparing è ciò che si dice essere un "Factory Method", la cui definizione è data nel successivo documento markdown. In breve, un factory method è un metodo che ritorna un oggetto che implementa una interfaccia funzionale (nel suo caso ritorna un oggetto che implementa l'interfacca funzionale `Comparator`) e che riceve, almeno nominalmente, come parametro qualcosa che implementi l'interfaccia funzionale `Function` (sia questa implementata in maniera estesa, con una lambda expression o con una method reference).
+
+Verrà fornito un 'cenno' di come è fatto questo factory method nel prossimo documento.

@@ -185,3 +185,21 @@ Ciò ritorna come output:
 ```
 
 Proprio come ci aspettavamo.
+
+
+# Com'è fatto il metodo .comparing()?
+
+Al netto di tutto ciò, possiamo finalmente "abbozzare" come sia fatto il factory method `comparing` dell'interfaccia `Comparator`:
+
+```
+public static Comparator comparing(Function extractor) {
+    return (o1, o2) -> {
+        Object key_1 = extractor.extract(o1);
+        Object key_2 = extractor(o2);
+
+        return ( (Comparable) key_1 ).compareTo( key_2 );
+    }
+}
+```
+
+Cioè riceve in ingresso un oggetto che implementa l'interfaccia funzionale `Function` del quale sfrutta il metodo `extract()`. Per la precisione ciò che fa il metodo `comparing` è fornire la lambda expression da usare per fare i diversi confronti nell'ordinamento. La lambda expression in questione è 'standard', e cioè prevede che dai due oggetti da confrontare venga estratto un valore di tipo `Comparable` (per questo in precedenza è stato detto che il valore di ritorno del metodo passato come parametro deve essere standard, poiché per questi è noto il metodo `compareTo` default), e venga restituito il confronto trai due valori estratti. In base a suddetto valore verranno ordinati nel vettore gli oggetti ricevuti in ingresso.
