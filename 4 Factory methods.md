@@ -124,6 +124,15 @@ Ciò ritorna come output:
 55
 ```
 
+## NOTA BENE
+Quando all'interno dei factory methods ci serviamo di attributi che non siano vettori, questi devono essere dichiarati come **final**.
+
+Non è strettamente necessario che la keyword `final` sia utilizzata nella dichiarazione, a patto che l'attributo non venga mai modificato all'interno della lambda expression.
+
+Questo discorso teoricamente vale anche per i vettori, ma di fatto di un vettore salviamo solamente un riferimento che non cambia mai, dunque le modifiche fatte all'interno del vettore non comportano problemi.
+
+In soldoni: se occorre modificare nel corso delle chiamate dei valori, questi devono essere salvati all'interno di vettori.
+
 
 # Esempio extra
 Come anticipato prima, oltre ad una lambda expression è possibile far ritornare ad un factory method una method reference. Nel nostro caso creiamo un metodo nella classe `ToBeReferenced` chiamato `test` così formato:
