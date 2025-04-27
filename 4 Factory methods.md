@@ -133,6 +133,7 @@ Questo discorso teoricamente vale anche per i vettori, ma di fatto di un vettore
 
 In soldoni: se occorre modificare nel corso delle chiamate dei valori, questi devono essere salvati all'interno di vettori.
 
+L'insieme delle variabili locali definite all'interno di un factory method e utilizate poi dalla lambda expression è detto "`closure`" della lambda expression.
 
 # Esempio extra
 Come anticipato prima, oltre ad una lambda expression è possibile far ritornare ad un factory method una method reference. Nel nostro caso creiamo un metodo nella classe `ToBeReferenced` chiamato `test` così formato:
