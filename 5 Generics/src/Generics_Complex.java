@@ -6,7 +6,7 @@ import Implementation.List;
 public class Generics_Complex {
     public static void main(String[] args) throws Exception {
         // Prima lista
-        List<Complex> L1 = new List();
+        List<Complex> L1 = new List<Complex>();
 
 
         L1.addElement(new Complex(0, 1));
@@ -53,34 +53,31 @@ public class Generics_Complex {
 
 
         System.out.println("Elementi della prima lista");
-        Iterator<Complex> it1 = L1.iterator();
-        while (it1.hasNext()) {
-            System.out.println(it1.next().toString());
+        for (Complex c : L1) {
+            System.out.println(c.toString());
         }
 
 
 
 
         System.out.println("Elementi della seconda lista");
-        Iterator<Complex> it2 = L2.iterator();
-        while (it2.hasNext()) {
-            System.out.println(it2.next().toString());
+        for (Complex c : L2) {
+            System.out.println(c.toString());
         }
 
 
-        Complex c = new Complex(1, 1);
-        System.out.println("Provo a cancellare l'elemento " + c.toString());
-        L1.deleteElement(c);
+        Complex C = new Complex(1, 1);
+        System.out.println("Provo a cancellare l'elemento " + C.toString());
+        L1.deleteElement(C);
         
         
-        c.setBoth(0, 1);
-        System.out.println("Provo a cancellare l'elemento " + c.toString());
-        L1.deleteElement(c);
+        C.setBoth(0, 1);
+        System.out.println("Provo a cancellare l'elemento " + C.toString());
+        L1.deleteElement(C);
 
         System.out.println("Elementi della prima lista");
-        it1 = L1.iterator();
-        while (it1.hasNext()) {
-            System.out.println(it1.next().toString());
+        for (Complex c : L1) {
+            System.out.println(c.toString());
         }
     }
 }

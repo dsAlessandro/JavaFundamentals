@@ -2,7 +2,7 @@ package Implementation;
 
 import java.util.Iterator;
 
-public class List<T> {
+public class List<T> implements Iterable<T> {
     // Definizione del singolo nodo
     class Node {
         T value;
@@ -30,6 +30,8 @@ public class List<T> {
 
 
     // Definizione del metodo per ottenere l'iteratore della lista
+
+    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             Node curr = head;

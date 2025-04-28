@@ -48,10 +48,27 @@ la presenza del termine `<T>` è ciò che rende la nostra lista parametrica.
 
 Noi cioè andiamo a costruire una lista che gestirà elementi di tipo `T`, **qualunque esso sia**. I metodi all'interno della classe, gli iteratori in essa definiti, tutti forniscono e accettano valori di tipo `T`, nonostante questo non sia noto a priori.
 
+Peraltro osserviamo che la classe `List` implementa l'interfaccia `Iterable<T>`, ove la il parametro della lista e dell'iterabile coincidono. Per questa ragione siamo in grado di effettuare cicli for con il costrutto 
+
+```
+List<Integer> L = new List<Integer>();
+for (Integer i : L) {
+    //...
+}
+```
+
+
 Vediamo poi come i due main forniti, presenti nei file `Generics_Integer` e `Generics_Complex` ambi istanzino una lista, ma lo facciano con parametri diversi:
 ```
-List<Integer> L1 = new List();
-List<Complex> L1 = new List();
+List<Integer> L1 = new List<Integer>();
+List<Complex> L1 = new List<Complex>();
+```
+
+È possibile omettere il tipo nel costruttore, in questo modo:
+
+```
+List<Integer> L1 = new List<>();
+List<Complex> L1 = new List<>();
 ```
 
 ## Cosa comporta ciò?
@@ -118,3 +135,30 @@ il compilatore lo avrebbe interpretato automaticamente con
 `List<Object> L1 = new List();`
 
 rendendo dunque vano l'impiego dei Generics.
+
+# Specifiche sui tipi
+
+Supponiamo di aggiungere una terza ipotesi alla struttura dati di nostro interesse:
+
+1) che sia 'universale', capace di contenere elementi di ogni tipo
+2) che sia forzatamente omogenea
+3) che permetta di salvare i dati in maniera ordinata
+
+
+Il problema che sorge con questa terza richiesta, quella relativa all'ordinamento, è che debba essere presente una ragione di ordine tra gli elementi di cui facciamo la lista.
+
+Questo può essere ragionevole se gli elementi sono numeri o stringhe, ma cosa accade quando si cerca di fare ciò per classi scritte ad hoc per le quali non sia così evidente la confrontabilità?
+
+Ovviamente coloro che sfruttano la lista ordinata dovrebbero avere la premura di utilizzarla con classi che estendono `Comparable`, ma noi non possiamo fidarci dell'utente: occorre un controllo da parte del compilatore stesso circa la veridicità di ciò.
+
+Osseriviamo dunque il file `SortedList.java` all'interno del package `Implementation`:
+
+```
+public class SortedList<T extends Comparable<T>> extends List<T>
+```
+
+ove specifichiamo che `SortedList` è una sotto-classe di `List`, anch'essa parametrizzata ma con un ulteriore vincolo: i tipi per cui è possibile definire una `SortedList` devono "estendere" (che in questo caso sostituisce "implementare") la classe `Comparable` tra loro.
+
+In questo modo saremo sicuri che il metodo `.compareTo` presente nell'`Ovverride` di `addElement` nella nuova lista vada sempre a buon fine e non generi eccezioni o crash inattesi.
+
+È riportato un esempio di codice al termine del main `Generics_Integer`.

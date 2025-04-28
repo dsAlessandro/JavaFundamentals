@@ -1,7 +1,7 @@
 import java.util.Iterator;
 
-import Implementation.Complex;
 import Implementation.List;
+import Implementation.SortedList;
 
 public class Generics_Integer {
     public static void main(String[] args) throws Exception {
@@ -28,7 +28,7 @@ public class Generics_Integer {
 
 
         // Seconda lista
-        List<Integer> L2 = new List();
+        List<Integer> L2 = new List<Integer>();
 
 
         L2.addElement(Integer.valueOf(4));
@@ -52,18 +52,16 @@ public class Generics_Integer {
 
 
         System.out.println("Elementi della prima lista");
-        Iterator<Integer> it1 = L1.iterator();
-        while (it1.hasNext()) {
-            System.out.println(it1.next().toString());
+        for (Integer i : L1) {
+            System.out.println(i.toString());
         }
 
 
 
 
         System.out.println("Elementi della seconda lista");
-        Iterator<Integer> it2 = L2.iterator();
-        while (it2.hasNext()) {
-            System.out.println(it2.next().toString());
+        for (Integer i : L2) {
+            System.out.println(i.toString());
         }
 
 
@@ -77,9 +75,32 @@ public class Generics_Integer {
         L1.deleteElement(c);
 
         System.out.println("Elementi della prima lista");
-        it1 = L1.iterator();
-        while (it1.hasNext()) {
-            System.out.println(it1.next().toString());
+        for (Integer i : L1) {
+            System.out.println(i.toString());
         }
+
+
+
+
+        //Test con lista ordinata
+        SortedList<Integer> L3 = new SortedList<>();
+
+        //elementi inseriti in ordine casuale
+        
+        L3.addElement(Integer.valueOf(0));
+
+        L3.addElement(Integer.valueOf(4));
+
+        L3.addElement(Integer.valueOf(1));
+
+        L3.addElement(Integer.valueOf(3));
+
+        L3.addElement(Integer.valueOf(2));
+
+        System.out.println("Elementi della lista ordinata");
+        for (Integer i : L3) {
+            System.out.println(i.toString());
+        }
+
     }
 }
