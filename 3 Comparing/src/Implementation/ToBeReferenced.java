@@ -5,12 +5,6 @@ import java.util.function.IntSupplier;
 import NewType.NewType;
 
 public class ToBeReferenced {
-    public static int double_compare(Double a, Double b) {
-
-        //utilizziamo i parametri al contrario per ottenere l'ordinamento inverso
-        return b.compareTo(a);
-    }
-
 
     public static String Example1(String s) {
         return s;
