@@ -52,7 +52,7 @@ public int compare(Object o1, Object o2) {
 
 ## Soluzione 1.5 - Classe anonima
 
-Senza dover ricorrere ad una classe creata appositamente per implementare l'interfaccia funzionale, è possibile ricorre a quella che è detta "**classe anonima**", la quale permette di istanziare una classe che implementi l'interfaccia funzionale direttamente dove serve, senza che questa sia prima definita in un file apposito, a patto di specificare il comportamento che il metodo dell'interfaccia funzionale deve avere.
+Senza dover ricorrere ad una classe creata appositamente per implementare l'interfaccia funzionale, è possibile ricorre a quella che è detta "**classe anonima**", la quale permette di istanziare un oggetto di una classe che implementi l'interfaccia funzionale direttamente dove serve, senza che questa sia prima definita in un file apposito, a patto di specificare il comportamento che il metodo dell'interfaccia funzionale deve avere.
 
 Il codice per fare ciò è presente nel file `FunctionalInterfaces.java` ed è il seguente:
 
