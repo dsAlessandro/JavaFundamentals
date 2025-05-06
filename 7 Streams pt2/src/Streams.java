@@ -9,6 +9,7 @@ public class Streams {
         /*
          * Stampa dei numeri pari da 0 a 100
          */
+        System.out.println("Esempio di filter");
         IntStream.range(0, 101)
         .filter((i) -> {
             return i % 2 == 0;
@@ -22,7 +23,7 @@ public class Streams {
         /*
         * Stampa dei primi 30 numeri pari a partire dai numeri da 0 a 1000
         */
-        
+        System.out.println("Esempio di limit");
         IntStream.range(0, 101)
         .filter((i) -> {
             return i % 2 == 0;
@@ -38,7 +39,7 @@ public class Streams {
         /*
         * Stampa degli ultimi 15 numeri pari a partire dai primi 30 numeri pari da 0 a 1000
         */
-        
+        System.out.println("Esempio di skip");
         IntStream.range(0, 101)
         .filter((i) -> {
             return i % 2 == 0;
@@ -58,6 +59,7 @@ public class Streams {
         * prima alfabeticamente (ordinamento naturale)
         * poi in ordine di lunghezza crescente
         */
+        System.out.println("Esempio di sorted");
         Stream.of("piacere", "mi", "chiamo", "alessandro")
         .sorted()
         .forEach(System.out::println);
@@ -77,6 +79,7 @@ public class Streams {
          * "Alessandro", "Luca", "Alessandro", "Gennaro", "Michele", "Luca"
          * previa eliminazione dei duplicati
          */
+        System.out.println("Esempio di distinct");
         Stream.of("Alessandro", "Luca", "Alessandro", "Gennaro", "Michele", "Luca")
         .distinct()
         .forEach(System.out::println);
@@ -91,6 +94,7 @@ public class Streams {
          * Passaggio da uno Stream di stringhe ad uno Stream di interi 
          * ottenuto considerando la lunghezza di ciascuna stringa
          */
+        System.out.println("Esempio di map");
         Stream.of("piacere", "mi", "chiamo", "alessandro")
         .map(String::length)
         .forEach(System.out::println);
@@ -99,10 +103,23 @@ public class Streams {
 
 
 
+        /*
+         * Esempio di utilizzo del metodo flatMap
+         */
+        System.out.println("Esempio di flatMap");
+        Stream.of("ciao", "come", "stai", "io", "sto", "bene")
+        .flatMap( (s) -> {
+            return s.chars().mapToObj((i) -> (char) i);
+        })
+        .forEach(System.out::println);
+        System.out.println("\n\n");
+
+
 
         /*
          * Esempio di utilizzo del metodo findAny
          */
+        System.out.println("Esempio di findAny");
         OptionalInt res = IntStream.range(0, 1000000)
         .parallel() //permette di eseguire le diverse operazioni in parallelo, a patto che ci siano le risorse
         .map(i -> i+2)
@@ -129,6 +146,7 @@ public class Streams {
         /*
          * Esempio di utilizzo del metodo findFirst
          */
+        System.out.println("Esempio di findFirst");
         res = IntStream.range(0, 1000000)
         .parallel() //permette di eseguire le diverse operazioni in parallelo, a patto che ci siano le risorse
         .map(i -> i+2)
@@ -150,6 +168,7 @@ public class Streams {
          /*
           * Esempio di utilizzo del metodo max
           */
+          System.out.println("Esempio di max");
         Optional<Integer> a = Stream.of("piacere", "mi", "chiamo", "alessandro")
         .map((s) -> {
             return Integer.valueOf(s.length());
@@ -173,19 +192,15 @@ public class Streams {
          /*
           * Esempio di utilizzo del metodo count
           */
+        System.out.println("Esempio di count");
+
         long b = Stream.of("piacere", "mi", "chiamo", "alessandro")
         .map((s) -> {
             return Integer.valueOf(s.length());
         })
         .count();
 
-        System.out.println(a + "\n\n");
-
-
-        IntStream.range(1, 100)
-        .forEach(System.out::println);
-        System.out.println("\n\n");
-
+        System.out.println(b + "\n\n");
 
 
 
@@ -193,6 +208,7 @@ public class Streams {
         /*
          * Esempio di utilizzo di (any/all/none)Match
          */
+        System.out.println("Esempio di (any/all/none)Match");
         boolean check;
         check = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         .anyMatch((i) -> {
@@ -239,7 +255,7 @@ public class Streams {
         /*
          * Esempio di utilizzo del metodo reduce
          */
-    
+        System.out.println("Esempio di reduce");
         Optional<Integer> tmp = Stream.of(1, 2, 3, 4, 5)
         .reduce((t1, t2) -> {return t1+t2;});
         if (tmp.isPresent()) {
@@ -255,6 +271,7 @@ public class Streams {
         /*
          * Esempio di utilizzo del metodo collect
          */
+        System.out.println("Esempio di collect");
         class Accumulator {
             int sum = 0;
         }

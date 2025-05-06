@@ -14,6 +14,6 @@ Ogni sottocartela è di fatto un Java Project ed in quanto tale andrebbe aperta 
 
 # Aggiornamenti della repo
 
-Qualora doveste incontrare errori nelle spiegazioni proposte (siano questi concettuali o grammaticali) sentitevi liberi di contattarmi direttamente qui, su GitHub, oppure su telegram sotto il tag `@devastasi` per le eventuali correzioni.
+Qualora doveste incontrare errori nelle spiegazioni proposte (siano questi concettuali o grammaticali) sentitevi liberi di contattarmi direttamente qui, su GitHub, oppure su telegram sotto il tag `@devastasi` per le eventuali correzioni. Allo stesso modo se ritenete che alcuni argomenti non trattati siano invece meritevoli di ricevere una sottocartella apposita comunicatemelo in privato e vedrò se aggiungerla o meno.
 
 Buono studio

@@ -133,7 +133,7 @@ for (Map.Entry<Integer, Long> e : M3.entrySet()) {
 
 ### partitioningBy
 
-È un caso specificiale del `groupingBy`, dove la mappa è necessariamente di tipo `Map<Boolean, ...>` il primo parametro è un oggetto di una classe che implementa l'interfaccia `Function<T, Boolean>`, in grado di verificare se un elemento dello stream rispetta o meno un predicato. Tutti quelli che lo rispettano risponderanno alla chiave `true`, tutti quelli che non lo rispettano risponderanno alla chiave `false`
+È un caso particolare del `groupingBy`, dove la mappa è necessariamente di tipo `Map<Boolean, ...>` il primo parametro è un oggetto di una classe che implementa l'interfaccia `Function<T, Boolean>`, in grado di verificare se un elemento dello stream rispetta o meno un predicato. Tutti quelli che lo rispettano risponderanno alla chiave `true`, tutti quelli che non lo rispettano risponderanno alla chiave `false`
 
 
 ### collectingAndThen
@@ -227,7 +227,7 @@ In quanto interfaccia presenta dei metodi da implementare:
 
 2) `BiConsumer<A, T> accumulator()`: fornisce un oggetto di una classe che implementa l'interfaccia `BiConsumer<A, T>`, avente un unico metodo: `void accept(<A> a, <T> t)` il quale deve inserire l'elemento `t` nell'accumulatore `a`
 
-3) `BinaryOperator<A> combiner()`: fornisce un oggetto di una classe che implementa l'interfaccia `BinaryOperator<A>`, avente un unico metodo: `<A> apply(<A> a1, <A> a2)` il quale combina l'accumulatore parziale `a1` con l'accumulatore parziale `a2` ritornando un accumulatore complessivo (potenzialmente riciclando uno dei due)
+3) `BinaryOperator<A> combiner()`: fornisce un oggetto di una classe che implementa l'interfaccia `BinaryOperator<A>`, avente un unico metodo: `void apply(<A> a1, <A> a2)` il quale combina l'accumulatore parziale `a1` con l'accumulatore parziale `a2`. Il metodo non ritorna nulla, bensì utilizza il primo accumulatore come risultato complessivo
 
 4) `Function<A, R> finiser()`: fornisce un oggetto di una classe che implementa l'interfaccia `Function<A, R>`, avente un unico metodo: `<R> apply(<A> a)` il quale estrae dall'accumulatore `a` un valore di tipo `<R>`, il risultato dell'operqazione di `collect`
 

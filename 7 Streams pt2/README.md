@@ -84,6 +84,22 @@ Stream.of("piacere", "mi", "chiamo", "alessandro")
 .forEach(System.out::println);
 ```
 
+## flatMap
+
+È una variante del metodo `map`. Al suo interno è necessario riportare una lambda expression avente come parametro un elemento dello stream **a monte** del metodo `.flatMap()`, suddetta lambda expression dovrà ritornare come risultato uno stream (non di dati primitivi, ma di oggetti, dunque `Stream<T>`) e il metodo `.flatMap()` si occuperà di congiungere tra loro tutti quesi stream producendone uno solo.
+
+Supponiamo ad esempio di costruire uno stream di stringhe e di voler produrre un stream di character, ovverro di tutti i caratteri comparsi nelle stringhe:
+
+```
+Stream.of("ciao", "come", "stai", "io", "sto", "bene")
+.flatMap( (s) -> {
+    return s.chars().mapToObj((i) -> (char) i);
+})
+.forEach(System.out::println);
+```
+
+Si noti che il metodo `.chars()` della classe `String` ritorna un `IntStream` costituito dai caratteri della stringa (i caratteri sono interpretati come interi)
+
 
 # Operazioni terminali
 

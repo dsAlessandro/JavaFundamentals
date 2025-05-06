@@ -168,6 +168,9 @@ OptionalDouble avg = IntStream
                     .average();
 ```
 
+Pet passare da un `IntStream` ad uno `Stream<T>` (cioè uno stream generico di oggetti) è possibile utilizzare il metodo `mapToObject` (esattamente come si farebbe con il metodo `.map` affrontato nel successivo pacchetto) convertendo ciascun `int` nello stream in un qualche tipo di oggetto.
+
+
 
 ## empty
 
