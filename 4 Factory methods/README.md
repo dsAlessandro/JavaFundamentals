@@ -1,17 +1,23 @@
 # Factory Methods
 
-Sono dei metodi di funzioni che ritornano un'istanza di una classe. Gli elementi stessi della classe sono stabiliti dal factory method.
+Un factory method è un metodo all'interno di una classe il cui scopo è ritornare un oggetto. Supponiamo di voler creare un oggetto di classe `Studente`: possiamo fare ciò in due modi:
+1) Invocando il costruttore della classe: `Studente S = new Studente(...);`
+2) Invocando un factory method definito come `public static Studente factory_method_student(...) {...}`, il quale, ricevuti i parametri richiesti, costruisce un oggetto di classe Studente e lo ritorna al chiamante.
 
-Negli esempi seguenti utilizziamo come riferimento l'interfaccia funzionale `IntSupplier`.
+Quanto detto non vale esclusivamente per oggetti appartenenti a delle classi ma anche **implementanti delle interfacce** e nel particolare a noi interessa che implementino delle **interfacce funzionali**.
 
-Vogliamo dunque creare delle classi che implementino tale interfaccia e vogliamo che il singolo metodo dell'interfaccia, `getAsInt`, ritorni la sequenza di fibonacci un intero alla volta.
+Negli esempi seguenti utilizziamo come riferimento l'interfaccia funzionale `IntSupplier`: vogliamo creare delle classi che implementino tale interfaccia e vogliamo che il singolo metodo dell'interfaccia, `getAsInt`, ritorni la sequenza di fibonacci un intero alla volta.
 
-# Sintassi estesa
+Possiamo fare ciò in diversi modi
+
+# Sintassi estesa (senza factory method)
 
 Nella nostra App:
 
 ```
 public class FactoryMethods {
+
+    //Classe annidata
     static class fibonacci implements IntSupplier {
         int[] ultimi = {1, 1};
     
@@ -29,6 +35,9 @@ public class FactoryMethods {
 
     }
     
+
+
+    //main
     public static void main(String[] args) throws Exception {
         fibonacci temp1 = new fibonacci();
         
@@ -39,7 +48,16 @@ public class FactoryMethods {
 }
 ```
 
-Ciò ritorna come output:
+Questa è di fatto l'implementazione completa vista nel pacchetto relativo alle interfacce di una interfaccia, sia questa funzionale o meno. Otterremo un oggetto che implementi l'interfaccia `IntSupplier` come
+
+`fibonacci temp1 = new fibonacci();`
+
+oppure
+
+`IntSupplier temp1 = new fibonacci();`
+
+
+Il main produce come output:
 ```
 1
 1
@@ -53,20 +71,25 @@ Ciò ritorna come output:
 55
 ```
 
+
 ## Osservazioni chiave
 1) La classe `fibonacci` è `static` in quanto non è associata a ciascuna istanza di FactoryMethods. Semplicemente esiste al suo interno e può essere istanziata all'occorrenza.
 
 2) Il vettore di interi `ultimi` non è di tipo `static`, il che significa che ogni qual volta si istanzia un oggetto di classe `fibonacci` questo ha un proprio contatore che riparte dall'inizio.
 
 
-# Sintassi compatta
-In una classe a parte:
+# Sintassi compatta (utilizzando un factory method)
+In una classe a parte (cioè diversa dalla classe `FactoryMethods`), implementiamo un metodo che ritorni un `IntSupplier` (= un oggetto di una classe che implementi l'interfaccia `IntSupplier`):
 ```
 public class ToBeReferenced {
 
+
+    //factory method
     public static IntSupplier fibonacci() {
         int[] ultimi = {1, 1};
 
+
+        //lamda expression
         return () -> {
             int res = ultimi[0];
             int next = ultimi[0] + ultimi[1];
@@ -81,7 +104,7 @@ public class ToBeReferenced {
 }
 ```
 
-La classe `ToBeReferenced` ospita un metodo, chiamato `fibonacci` che non riceve parametri. Questo metodo è di tipo `public static`, di fatto è alla stregua di una funzione C.
+La classe `ToBeReferenced` ospita un **metodo**, chiamato `fibonacci` che non riceve parametri. Questo metodo è di tipo `public static`, di fatto è alla stregua di una funzione C.
 
 Il valore di ritorno di suddetto metodo è un `IntSupplier`.
 
@@ -92,11 +115,18 @@ Questo metodo deve ritornare un'oggetto di una classe che implementa l'interfacc
 
 Il vettore da noi creato è parte dell'istanza e dunque il riferimento ad esso non viene perso quando viene raggiunta l'istruzione di return.
 
+Il che significa che sarà possibile ottenere un oggetto che implementi l'interfaccia `IntSupplier` come:
+
+`IntSupplier temp2 = ToBeReferenced.fibonacci();`
+
+senza dover ricorrere ad alcuna `new`, poiché il metodo stesso costruisce l'oggetto.
+
+
+
 Nella nostra app dunque vedremo:
 
 ```
 public class FactoryMethods {
-
     public static void main(String[] args) throws Exception {
 
         IntSupplier temp2 = ToBeReferenced.fibonacci();
