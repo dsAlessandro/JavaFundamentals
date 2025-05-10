@@ -67,7 +67,7 @@ analogo a `toList` e `toSet`, ma con la differenza che come parametro si aspetta
 
 ### joining 
 
-Funzionante solo per `Stream<Stirng>`, concatena tutti gli elementi a quello step dello stream tra loro.
+Funzionante solo per `Stream<String>`, concatena tutti gli elementi a quello step dello stream tra loro.
 Accetta tre parametri opzionali:
 1) un separatore tra un stringa e l'altra
 2) un prefisso alla stringa complessiva

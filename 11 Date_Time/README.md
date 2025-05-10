@@ -32,7 +32,7 @@ Decisamente controintuitivo.
 
 Per quanto riguarda gli istanti di tempo la classe generale `Temporal`, implementata nelle 'sotto-classi':
 
-- `Instant` <- tempo 
+- `Instant` <- tempo (UTC)
 - `LocalDate` <- data, rispetto alla nostra time-zone
 - `LocalDateTime` <- data e ora locale
 - `LocalTime` <- tempo locale
@@ -52,3 +52,44 @@ Le classi derivanti da `Temporal` ammettono i seguenti factory methods:
 - `from()`, fornisce un'istanza di tempo ottenuta convertendo i dati di un'altra (eventualmente perdendo informazioni)
 - `parse()`, fornisce un'istanza di tempo generata a partire da una stringa ricevuta come parametro
 - `now()`, fornisc un'istanza di tempo che indica l'istante attuale. Accetta evenutalmente una `ZoneId` come parametro
+
+## Changing
+
+È possibile modificare delle date o degli istanti di tempo salvati all'interno di variabili tramite i seguenti metodi:
+
+1) `.minus()`, rimuove la quantità di tempo specificata come parametro dall'istante su cui viene chiamato
+2) `.plus()`, aggiunge la quantità di tempo specificata come parametro dall'istante su cui viene chiamato
+2) `.with()`, riceve come parametro un "temporal adjuster" che modifica la data opportunamente
+
+`TemporalAdjusters` è un'interfaccia funzionale contenente come unico metodo il metodo:
+
+```
+Temporal adjustInto(Temporal t)
+```
+
+che riceve un oggetto di classe `Temporal` e ne ritorna un'altro modificando quello ricevuto come parametro. Possiamo quindi pensare di implementarla attraverso una lambda function.
+
+include alcuni metodi fondamentali, come:
+- `firstDayofMonth()`
+- `firstDayOfNextMonth()`
+- `firstInMonth(DayOfWeek dayOfWeek)`
+ecc..
+
+## Utilizzo di stream
+
+Supponiamo di voler contare tutte le date tra il 2025-12-01 e il 2025-12-25 che sono giorni infrasettimanali.
+
+Sfruttiamo il metodo `.datesUntill()` della classe `LocalDate` per ottenere uno stream di `LocalDate`, contenente tutte le date a partire da quella su cui si applica il metodo (inclusa) fino a quella che riceve come parametro (esclusa).
+
+Il codice per ottenere il risultato è il seguente:
+
+```
+LocalDate xmas = LocalDate.of(2025, 12, 25);
+LocalDate firstOfxmasMonth = xmas.with(TemporalAdjusters.firstDayOfMonth());
+
+long n_infra = 
+firstOfxmasMonth.datesUntil(xmas.plusDays(1))
+.filter((D) -> D.getDayOfWeek() != DayOfWeek.SATURDAY)
+.filter((D) -> D.getDayOfWeek() != DayOfWeek.SUNDAY)
+.count();
+```
