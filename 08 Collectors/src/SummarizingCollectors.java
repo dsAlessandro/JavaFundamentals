@@ -65,12 +65,19 @@ public class SummarizingCollectors {
         S = L.stream();
         Set<Integer> S2 = S.collect(Collectors.toSet());
         S = L.stream();
+
+        
+        // equivalente a
+        //Queue<Integer> Q2 = S.collect(Collectors.toCollection(PriorityQueue::new));
         Queue<Integer> Q = S.collect(Collectors.toCollection(() -> {
             return new PriorityQueue<Integer>();
         }));
 
-        // equivalente a
-        //Queue<Integer> Q2 = S.collect(Collectors.toCollection(PriorityQueue::new));
+
+
+
+
+
 
         Iterator<Integer> it_l = L2.iterator(); 
         Iterator<Integer> it_s = S2.iterator(); 

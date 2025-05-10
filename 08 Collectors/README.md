@@ -73,6 +73,7 @@ Accetta tre parametri opzionali:
 2) un prefisso alla stringa complessiva
 3) un suffisso alla stringa complessiva
 
+
 ## Grouping collectors
 
 Il loro scopo è quello di restituire una `Map` costruita dallo stream

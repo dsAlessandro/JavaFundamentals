@@ -6,7 +6,7 @@ Le collection in java sono utili perché permettono di salvare dati ed accedervi
 
 Nel package `Implementation` è presente il file `Data.java` nel quale è definita una variabile `static` chiamata `TESTO` che contiene l'intera sigla delle "Winx" sotto forma di grande stringa.
 
-Il nostro obiettivo è quello di stampare, di tutta la sigla, solo le prime 4 parole (in ordine alfabetico e senza duplicati). Vediamo come è possibile approcciare il problema utilizzando i collectors:
+Il nostro obiettivo è quello di stampare, di tutta la sigla, solo le prime 4 parole (in ordine alfabetico e senza duplicati). Vediamo come è possibile approcciare il problema utilizzando le collections:
 
 ### Soluzione 1
 
@@ -58,7 +58,7 @@ Stream.of(words)
 .forEach(System.out:println);
 ```
 
-Il vantaggio fondamentale di questa soluzione è proprio la chiarezza e l'immediatezza. Se qualcuno dovesse leggere il nostro codice precedente potrebbe avere difficoltà a capire contestualmente ciò che ci eravamo preffisati di fare. Potrebbe non essere chiaro se la scelta di utilizzare un `TreeSet` fosse arbitraria o centrasse con il nostro obettivo (_ha usato un **Tree**Set perché voleva le stringhe ordinate? Ha scelto un Tree**Set** perché le voleva distinte? Ha scelto un **TreeSet** perché voleva entrambe le cose?_  su cosa, precisamente, va posta l'enfasi?)
+Il vantaggio fondamentale di questa soluzione è proprio la chiarezza e l'immediatezza. Se qualcuno dovesse leggere il nostro codice precedente potrebbe avere difficoltà a capire contestualmente ciò che ci eravamo preffisati di fare. Potrebbe non essere chiaro se la scelta di utilizzare un `TreeSet` fosse arbitraria o centrasse con il nostro obiettivo (_ha usato un **Tree**Set perché voleva le stringhe ordinate? Ha scelto un Tree**Set** perché le voleva distinte? Ha scelto un **TreeSet** perché voleva entrambe le cose?_  su cosa, precisamente, va posta l'enfasi?)
 
 L'impiego di uno `Stream` risolve completamente questo problema poiché tutto ciò con cui partiamo è un flusso -stream- di stringhe, privo di qualsivoglia caratteristica, ed è solo dopo che noi (programmatore) introduciamo dei vincoli da rispettare che il nostro flusso assume una forma ben definita.
 

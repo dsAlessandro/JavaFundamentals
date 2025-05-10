@@ -13,6 +13,9 @@ public class GroupingCollectors {
     public static void main(String[] args) throws Exception {
         String[] lyrics = Data.TESTO.split("[\n,' ]+");
 
+
+
+        System.out.println("groupingBy #1");
         Map<Integer, List<String> > M = Stream.of(lyrics)
         .distinct() //opzionale, aggiunto per estetica
         .collect(Collectors.groupingBy(String::length));
@@ -40,6 +43,7 @@ public class GroupingCollectors {
 
 
         //Alternativa: passaggio di downstream collector al groupingBy
+        System.out.println("groupingBy #2, con utilizzo di downstream");
         Map<Integer, Long> M2 = Stream.of(lyrics)
                                 .distinct()
                                 .collect(Collectors.groupingBy(String::length, Collectors.counting()));
@@ -52,9 +56,8 @@ public class GroupingCollectors {
 
 
 
-
-
         //Alternativa: specifica del tipo di mappa
+        System.out.println("groupingBy #3, con specifica del tipo di mappa da utilizzare");
         Map<Integer, Long> M3 = Stream.of(lyrics)
                                 .distinct()
                                 .collect(Collectors.groupingBy(String::length, TreeMap::new, Collectors.counting()));
@@ -68,8 +71,8 @@ public class GroupingCollectors {
 
 
 
-
         //Utilizzo di collectingAndThen
+        System.out.println("collectingAndThen");
         Map<Integer, String> M4 = Stream.of(lyrics)
                                     .distinct()
                                     .collect(
@@ -96,6 +99,7 @@ public class GroupingCollectors {
 
 
         //Utilizzo di mapping
+        System.out.println("mapping");
         Map<Integer, IntSummaryStatistics> M5 = Stream.of(lyrics)
                                     .distinct()
                                     .collect(
