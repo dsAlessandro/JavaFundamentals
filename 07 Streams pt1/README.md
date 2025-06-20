@@ -64,7 +64,7 @@ L'impiego di uno `Stream` risolve completamente questo problema poiché tutto ci
 
 Dal flusso di stringhe generico abbiamo imposto che queste fossero ordinate (`.sorted()`), dopodiché abbiamo richiesto che fossero distinte (`.distinct()`), poi che ci si fermasse alle prima 4 ottenute **dal flusso risultante** (`.limit(4)`) e infine che per ciascuna di quelle avanzanti avvenisse un'operazione di stampa a schermo (`.forEach(System.out::println)`).
 
-Non c'è spazio per l'interpretazione: chiunque, leggendo questo pezzo di codice, potrebbe benissimo concludere quale fosse la richiesta del problema e nessuono potrebbe obiettare che non stia accadendo quanto richiesto.
+Non c'è spazio per l'interpretazione: chiunque, leggendo questo pezzo di codice, potrebbe benissimo concludere quale fosse la richiesta del problema e nessuno potrebbe obiettare che non stia accadendo quanto richiesto.
 
 # Stream
 
@@ -74,7 +74,7 @@ Gli elementi del flusso scorrono uno per volta, ed è per questo che possiamo ap
 Ad ogni modo da un flusso di dati se ne può generare un altro: ricevuto un flusso, possiamo riorganizzarlo e poi farlo ripartire: è il caso di `sorted()`, che accumula i dati provenienti da uno stream, li ordina, e poi li fa ripartire uno per volta sotto forma di nuovo stream, e di `distinct()`, che nuovamente li accumula, cancella i duplicati, e poi li rimanda fuori sotto forma di stream.
 
 È evidente che se in ingresso si ha uno stream di `<T>`, qualunque sia l'operazione intermedia applicata, in uscita si possono avere solo due cose:
-1) Un nuovo stream di `<T>`
+1) Un nuovo stream di `<T>` (eventualmente un `<T>` tipo diverso rispetto a prima)
 2) Nulla
 
 Cioè le operazioni possono essere "intermedie", che ricevono uno stream e producono uno stream o "terminali" che ricevono uno stream e ne terminano il flusso.
@@ -129,11 +129,36 @@ Stream.of(1, 2, 3);
 
 ## generate
 
-Si ha un oggetto che implementa l'interfaccia `Supplier<T>` con il suo singolo metodo `<T> get()` dal quale lo stream otterrà il prossimo elemento del flusso:
+Si ha un oggetto che implementa l'interfaccia `Supplier<T>` con il suo singolo metodo `<T> get()` dal quale lo stream otterrà il prossimo elemento del flusso. Sempre in `Implementation` è presente il file `FibonacciSupplier.java`, che implementa la classe `Supplier<Integer>`:
 
 ```
-Stream<Integer>.
+public class FibonacciSupplier implements Supplier<Integer> {
+    Integer[] ultimi = {1, 1};
+    
+    @Override
+    public Integer get() {
+        int res = ultimi[0];
+        int next = ultimi[0] + ultimi[1];
+        
+        ultimi[0] = ultimi[1];
+        ultimi[1] = next;
+        
+        return res;
+    }
+}
 ```
+
+A questo punto in `Streams.java` non ci resta che scrivere:
+
+```
+FibonacciSupplier supp = new FibonacciSupplier();
+
+Stream.generate(supp)
+.limit(14)
+.forEach(System.out::println);
+```
+
+Ottenendo in questo modo i primi 14 (a titolo di esempio) numeri di Fibonacci.
 
 
 ## iterate

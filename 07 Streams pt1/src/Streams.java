@@ -1,5 +1,7 @@
 
 import Implementation.Data;
+import Implementation.FibonacciSupplier;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.OptionalDouble;
@@ -92,17 +94,11 @@ public class Streams {
         /*
         * Utilizzo del .generate()
         */
-        
-        int[] ultimi = {1, 1};
-        Stream.generate(() -> {
-            int res = ultimi[0];
-            int next = ultimi[0] + ultimi[1];
-            
-            ultimi[0] = ultimi[1];
-            ultimi[1] = next;
-            
-            return res;
-        }).limit(14).forEach(System.out::println);
+        FibonacciSupplier supp = new FibonacciSupplier();
+
+        Stream.generate(supp).
+        limit(14).
+        forEach(System.out::println);
         System.out.println("\n\n");
         
         
