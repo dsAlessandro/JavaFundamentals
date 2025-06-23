@@ -92,7 +92,7 @@ Difatto l'operazione di read ritorna un intero, salvato nella variabile `n`, che
 supponiamo di aver letto: `egno di `, 8 caratteri all'ultima riga, e di aver appeso ciò allo `StringBuilder`. La successiva lettura permetterà di leggere solo `Winx`, 4 caratteri, gli ultimi del file. Ciò significa che il buffer assumerà questo contenuto: `Winx di `, poiché i restanti 4 caratteri non sono stati sovrascritti. La variante a singolo parametro della `append` riporterà nello `StringBuilder` complessivamente `egno di Winx di `, e non `egno di Winx`, come ci auguravamo.
 
 2) l'indice (incluso) dal quale cominciare a copiare i caratteri dell'array
-3) l'indice (escliso) col quale terminare la copiatura
+3) l'indice (escluso) col quale terminare la copiatura
 
 Ovviamente per correttezza logica nella codice è stata utilizzata la versione a 3 parametri.
 
