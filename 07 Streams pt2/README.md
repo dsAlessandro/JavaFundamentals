@@ -179,7 +179,7 @@ L'ultimo metodo terminale di nostro interesse è il metodo `collect`. Similmente
 
 Il metodo `.collect()` necessita di tre parametri:
 
-1) Il riferimento ad metodo che permette di creare un "accumulatore", vale a dire una classe predisposta da noi per compattare i dati
+1) Il riferimento ad un metodo che permette di creare un "accumulatore", vale a dire una classe predisposta da noi per compattare i dati
 2) Il riferimento ad un metodo o la descrizione di una lambda expression che specifichi come quell'accumulatore deve compattare i dati
 3) Il riferimento ad un metodo o la descrizione di una lambda expression che specifichi come i dati compattati da più collettori possano essere a loro volta ricompattati insieme
 
